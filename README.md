@@ -1,1 +1,1 @@
-# MAVIS is a service that wraps the MedHub API
+# MAVIS is a wrapper for the MedHub API
