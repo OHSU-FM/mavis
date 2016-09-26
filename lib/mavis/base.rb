@@ -1,62 +1,65 @@
-require "forwardable"
+require "mavis/null_object.rb"
+
 module Mavis
   class Base
-    extend Forwardable
     attr_reader :attrs
     alias to_h attrs
     alias to_hash to_h
 
-    def attribute_reader attrs
+    # @param attrs [Hash]
+    # @return [Mavis::Base]
+    def initialize attrs = {}
+      @attrs = attrs
+      attr_reader attrs
+    end
+
+    # Define getter and getter? for each attr
+    #
+    # @param attrs [Enumerable]
+    # @return attrs [Enumerable]
+    def attr_reader attrs
       attrs.each do |key, value|
-        self.class.send(:define_method, key) do
-          if attr_falsey_or_empty?(key)
-            NullObject.new
-          else
-            @attrs[key]
-          end
+        define_attribute_method(key)
+        define_predicate_method(key)
+      end
+    end
+
+    # Define getter for a single attr
+    #
+    # @param attr [key]
+    def define_attribute_method attr
+      self.class.send(:define_method, attr) do
+        if attr_falsey_or_empty?(attr)
+          NullObject.new
+        else
+          @attrs[attr]
         end
       end
     end
 
-    def initialize attrs = {}
-      @attrs = attrs
-      attribute_reader attrs
+    # Define getter? for a single attr
+    #
+    # @param attr [key]
+    def define_predicate_method attr
+      self.class.send(:define_method, "#{attr}?") do
+        !attr_falsey_or_empty?(attr)
+      end
     end
 
-    def [](method)
-      send(method.to_sym)
+    # @param key [attr] || *
+    # @return [@attrs[attr]] || nil
+    def [](key)
+      send(key.to_sym)
     rescue NoMethodError
       nil
     end
 
     private
 
+    # @param key [attr] || *
+    # @return [Boolean]
     def attr_falsey_or_empty? key
       !@attrs[key] || @attrs[key].respond_to?(:empty) && @attrs[key].empty?
     end
-
-    # # @param options [Hash]
-    # # @return [Mavis::Client]
-    # def initialize options = {}
-    #   options.each do |key, value|
-    #     # instance_variable_set "@#{key}", value
-    #     define_attr_reader(key)
-    #   end
-    #   yield self if block_given?
-    # end
-    #
-    # # @return [Hash]
-    # def credentials
-    #   {
-    #     client_id: client_id,
-    #     institution: institution,
-    #     p_key: p_key
-    #   }
-    # end
-    #
-    # # @return [Boolean]
-    # def credentials?
-    #   credentials.values.all?
-    # end
   end
 end

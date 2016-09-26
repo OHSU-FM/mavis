@@ -1,23 +1,56 @@
-module Mavis
-  class Client < Mavis::Base
+require "mavis/api"
+require "httparty"
 
-    def self.test
-      client_id = settings.client_id
-      institution = settings.institution
-      p_key = settings.p_key
-      call_path = "info/test"
-      request = ""
-      time_now = Time.now.to_i
-      v_str = Digest::SHA256.hexdigest("#{client_id}|#{time_now}|#{p_key}|#{request}")
-      post_data = {
-        "clientID": client_id,
-        "ts": time_now,
-        "verify": v_str,
-        "type": "json"
+module Mavis
+  class Client
+    include Mavis::API
+    BASE_HTTPS = "https://"
+    BASE_URL   = ".medhub.com/functions/api/"
+
+    # @param options [Hash]
+    # @return [Mavis::Client]
+    def initialize options = {}
+      options.each do |key, value|
+        instance_variable_set "@#{key}", value
+      end
+      yield self if block_given?
+    end
+
+    def perform_post url, data
+      HTTParty.post(url, body: data)
+    end
+    #
+    # @return [Hash]
+    def credentials
+      {
+        client_id:   @client_id,
+        institution: @institution,
+        p_key:       @p_key
       }
-      url = "https://#{institution}.medhub.com/functions/api/#{call_path}"
-      response = HTTParty.post(url, body: post_data)
-      response.body
+    end
+
+    # @return [Boolean]
+    def credentials?
+      credentials.values.all?
+    end
+
+    private
+
+    def verify_string request
+      Digest::SHA256.hexdigest("#{credentials[:client_id]}|#{Time.now.to_i}|#{credentials[:p_key]}|#{request}")
+    end
+
+    def build_url call_path
+      "#{BASE_HTTPS + credentials[:institution] + BASE_URL + call_path}"
+    end
+
+    def build_post_data v_string
+      {
+        clientID: credentials[:client_id],
+        ts:       Time.now.to_i,
+        verify:   v_string,
+        type:     "json"
+      }
     end
   end
 end
