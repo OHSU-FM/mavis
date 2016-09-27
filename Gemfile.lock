@@ -1,7 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.4.0)
     coderay (1.1.1)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
     ffi (1.9.14)
     formatador (0.2.5)
@@ -19,6 +22,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    hashdiff (0.3.0)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     listen (3.1.5)
@@ -54,9 +58,14 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     ruby_dep (1.4.0)
+    safe_yaml (1.0.4)
     shellany (0.0.1)
     slop (3.6.0)
     thor (0.19.1)
+    webmock (2.1.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
 
 PLATFORMS
   ruby
@@ -68,6 +77,7 @@ DEPENDENCIES
   naught
   pry
   rspec
+  webmock
 
 BUNDLED WITH
    1.13.1

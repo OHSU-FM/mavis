@@ -1,4 +1,4 @@
-require "mavis/information"
+require_relative "information"
 
 module Mavis
   module API

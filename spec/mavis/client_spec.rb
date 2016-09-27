@@ -26,4 +26,10 @@ describe Mavis::Client do
         .to be_falsey
     end
   end
+
+  describe "attr_readers" do
+    it "has methods to read credential values" do
+      expect(@client.client_id).to eq @creds[:client_id]
+    end
+  end
 end

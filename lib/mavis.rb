@@ -1,2 +1,3 @@
-require "mavis/base"
-require "mavis/client"
+require "resolv-replace"
+require_relative "mavis/base"
+require_relative "mavis/client"

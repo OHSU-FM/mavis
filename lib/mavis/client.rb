@@ -1,4 +1,4 @@
-require "mavis/api"
+require_relative "api"
 require "httparty"
 
 module Mavis
@@ -11,6 +11,9 @@ module Mavis
     # @return [Mavis::Client]
     def initialize options = {}
       options.each do |key, value|
+        self.class.send(:define_method, key) do
+          value
+        end
         instance_variable_set "@#{key}", value
       end
       yield self if block_given?
@@ -34,11 +37,11 @@ module Mavis
       credentials.values.all?
     end
 
-    private
-
     def verify_string request
       Digest::SHA256.hexdigest("#{credentials[:client_id]}|#{Time.now.to_i}|#{credentials[:p_key]}|#{request}")
     end
+
+    private
 
     def build_url call_path
       "#{BASE_HTTPS + credentials[:institution] + BASE_URL + call_path}"

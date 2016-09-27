@@ -1,4 +1,4 @@
-require "mavis/null_object.rb"
+require_relative "null_object"
 
 module Mavis
   class Base
