@@ -2,7 +2,11 @@ require "helper"
 
 describe "external request" do
   it "queries the medhub api" do
-    uri = URI("https://test.medhub.com/functions/api/info/text")
+    stub_request(:get, "https://test.medhub.com/functions/api/").
+      with(headers: headers).
+      to_return(status: 200, body: "stubbed response", headers: {})
+
+    uri = URI("https://test.medhub.com/functions/api/")
 
     response = Net::HTTP.get(uri)
 

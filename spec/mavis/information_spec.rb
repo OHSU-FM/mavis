@@ -8,26 +8,39 @@ describe Mavis::Information do
   describe "#test" do
     before do
       stub_post("/info/test")
-        .with("body" => body(@client, ""), "headers" => headers)
-        .to_return("status" => 200, "body" => fixture("test.json"))
+        .with(body: body(@client, ""), headers: headers)
+        .to_return(status: 200, body: fixture("test.json"))
     end
 
     it "should return 'success'" do
-      t = @client.test.body
-      expect(t).to include "success"
+      t = @client.test()
+      expect(t["response"]).to eq "success"
     end
   end
 
   describe "#status" do
     before do
       stub_post("/info/status")
-        .with("body" => body(@client, ""), "headers" => headers)
-        .to_return("status" => 200, "body" => fixture("status.json"))
+        .with(body: body(@client, ""), headers: headers)
+        .to_return(status: 200, body: fixture("status.json"))
     end
 
     it "should return 'success'" do
-      t = @client.status.body
-      expect(t).to include "active"
+      t = @client.status()
+      expect(t["status"]).to eq "active"
+    end
+  end
+
+  describe "#access" do
+    before do
+      stub_post("/info/status")
+        .with(body: body(@client, ""), headers: headers)
+        .to_return(status: 200, body: fixture("status.json"))
+    end
+
+    it "should return 'success'" do
+      t = @client.status()
+      expect(t["status"]).to eq "active"
     end
   end
 end

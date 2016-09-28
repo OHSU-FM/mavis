@@ -10,14 +10,14 @@ module Mavis
     # @return [Mavis::Base]
     def initialize attrs = {}
       @attrs = attrs
-      attr_reader attrs
+      attribute_reader attrs
     end
 
     # Define getter and getter? for each attr
     #
     # @param attrs [Enumerable]
     # @return attrs [Enumerable]
-    def attr_reader attrs
+    def attribute_reader attrs
       attrs.each do |key, value|
         define_attribute_method(key)
         define_predicate_method(key)

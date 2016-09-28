@@ -10,6 +10,29 @@ describe Mavis::Client do
     @client = Mavis::Client.new(@creds)
   end
 
+  describe "attr_readers" do
+    it "has methods to read credential values" do
+      expect(@client.client_id).to eq @creds[:client_id]
+    end
+  end
+
+  describe "#perform_post" do
+    it "performs a post request" do
+      stub_post("").with(headers: headers).to_return(body: {}.to_json)
+
+      @client.perform_post("https://test.medhub.com/functions/api", {})
+      expect(a_post("")).to have_been_made
+    end
+
+    it "returns JSON" do
+      stub_post("").with(headers: headers)
+      .to_return(body: {"key":"value"}.to_json)
+
+      r = @client.perform_post("https://test.medhub.com/functions/api", {})
+      expect(r["key"]).to eq "value"
+    end
+  end
+
   describe "#credentials" do
     it "returns a hash of credentials" do
       expect(@client.credentials).to eq @creds
@@ -27,9 +50,13 @@ describe Mavis::Client do
     end
   end
 
-  describe "attr_readers" do
-    it "has methods to read credential values" do
-      expect(@client.client_id).to eq @creds[:client_id]
+  describe "#verify_string" do
+    it "returns a string" do
+      expect(@client.verify_string("hi!")).to be_a String
+    end
+
+    it "accepts empty requests" do
+      expect(@client.verify_string("")).to be_a String
     end
   end
 end

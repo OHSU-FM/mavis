@@ -8,13 +8,13 @@ describe "errors" do
   describe "malformed verify string" do
     before do
       stub_post("/info/test")
-        .with("body" => body(@client, ""), "headers" => headers)
-        .to_return("body" => fixture("error_s07.json"))
+        .with(body: body(@client, ""), headers: headers)
+        .to_return(body: fixture("error_s07.json"))
     end
 
     it "returns error s07" do
       response = @client.test()
-      expect(response.body).to include "ErrorDescription"
+      expect(response["ErrorCode"]).to eq "S07"
     end
   end
 end

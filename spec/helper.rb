@@ -15,6 +15,10 @@ def a_get path
   a_request(:get, "https://test.medhub.com/functions/api" + path)
 end
 
+def a_post path
+  a_request(:post, "https://test.medhub.com/functions/api" + path)
+end
+
 def stub_get path
   stub_request(:get, "https://test.medhub.com/functions/api" + path)
 end
@@ -28,7 +32,7 @@ def fixture_path
 end
 
 def fixture file
-  File.new(fixture_path + "/" + file)
+  File.read(fixture_path + "/" + file).strip
 end
 
 def body client, request
