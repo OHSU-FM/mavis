@@ -28,11 +28,7 @@ module Mavis
     # @param data [Hash]
     # @return [Hash, Array]
     def perform_post url, data
-      begin
-        JSON.parse(HTTParty.post(url, body: data))
-      rescue TypeError
-        JSON.parse(HTTParty.post(url, body: data).to_json)
-      end
+      JSON.parse(HTTParty.post(url, body: data,).parsed_response())
     end
 
     # get a hash of client id/auth values
@@ -78,11 +74,11 @@ module Mavis
     def build_post_data request
       data = {
           "clientID" => client_id,
-          "ts" =>       Time.now.to_i.to_s,
-          "verify" =>   verify_string(request),
-          "type" =>     "json"
+          "ts"       => Time.now.to_i.to_s,
+          "verify"   => verify_string(request),
+          "type"     => "json"
         }
-      request.empty? ? data : data["request"] = request.to_json
+      request.empty? ? data : data['request'] = request
       data
     end
   end

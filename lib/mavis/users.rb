@@ -4,7 +4,7 @@ module Mavis
     # Identifies possible user-types at the institution
     #
     # @return [Array[Hash]]
-    def types
+    def users_types
       call_path = "users/types"
       request = ""
       data = build_post_data(request)
@@ -14,7 +14,7 @@ module Mavis
     # Identifies possible user-types at the institution
     #
     # @return [Array[Hash]]
-    def residents program_id
+    def users_residents program_id
       call_path = "users/residents"
       request = {"programID": program_id}
       data = build_post_data(request)
@@ -31,10 +31,10 @@ module Mavis
     # @param username [String] *optional
     # @param employeeID [String] *optional
     # @return [Array[Hash]]
-    def users_search terms={}
+    def users_student_search terms={}
       call_path = "users/studentSearch"
       request = terms
-      data = build_post_data(request)
+      data = build_post_data(request.to_json)
       perform_post(build_url(call_path), data)
     end
   end

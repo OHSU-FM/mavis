@@ -9,11 +9,11 @@ describe Mavis::Information do
     before do
       stub_post("/info/test")
         .with(body: body(@client, ""), headers: headers)
-        .to_return(status: 200, body: fixture("test.json"))
+        .to_return(status: 200, body: fixture("info_test.json"))
     end
 
     it "should return 'success'" do
-      t = @client.test()
+      t = @client.info_test()
       expect(t["response"]).to eq "success"
     end
   end
@@ -22,11 +22,11 @@ describe Mavis::Information do
     before do
       stub_post("/info/status")
         .with(body: body(@client, ""), headers: headers)
-        .to_return(status: 200, body: fixture("status.json"))
+        .to_return(status: 200, body: fixture("info_status.json"))
     end
 
     it "should return 'success'" do
-      t = @client.status()
+      t = @client.info_status()
       expect(t["status"]).to eq "active"
     end
   end
@@ -35,11 +35,11 @@ describe Mavis::Information do
     before do
       stub_post("/info/access")
         .with(body: body(@client, ""), headers: headers)
-        .to_return(status: 200, body: fixture("access.json"))
+        .to_return(status: 200, body: fixture("info_access.json"))
     end
 
     it "should return an Array of hashes" do
-      t = @client.access()
+      t = @client.info_access()
       expect(t).to be_a Array
       expect(t.first).to be_a Hash
       # the access call should always include a reference to the access endpoint
@@ -65,11 +65,11 @@ describe Mavis::Information do
     before do
       stub_post("/info/terms")
         .with(body: body(@client, ""), headers: headers)
-        .to_return(status: 200, body: fixture("terms.json"))
+        .to_return(status: 200, body: fixture("info_terms.json"))
     end
 
     it "should return a hash" do
-      t = @client.terms()
+      t = @client.info_terms()
       expect(t).to be_a Hash
     end
   end

@@ -13,7 +13,7 @@ describe "errors" do
     end
 
     it "returns error s07" do
-      response = @client.test()
+      response = @client.info_test()
       expect(response["ErrorCode"]).to eq "S07"
     end
   end
