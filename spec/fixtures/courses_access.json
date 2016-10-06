@@ -1,0 +1,10 @@
+ [{"courseID":"516", "course_name":" [FAMP 720] Fam Medicine - PeaceHealthSHMC", "course_abbrev":"FAMP 720 7"},
+  {"courseID":"515", "course_name":" [FAMP 720] Family Medicine", "course_abbrev":"FAMP 720 1"},
+  {"courseID":"518", "course_name":" [FAMP 720] Family Medicine - Salem Health", "course_abbrev":"FAMP 720 SH"},
+  {"courseID":"517", "course_name":" [FAMP 720] Family Medicine-St Charles", "course_abbrev":"FAMP 720 C"},
+  {"courseID":"601", "course_name":" [FAMP 730] Family Medicine Core Clin Exp", "course_abbrev":"FAMP 730 1"},
+  {"courseID":"606", "course_name":" [FAMP 731A] Fam Med Continuity Core", "course_abbrev":"FAMP 731A"},
+  {"courseID":"610", "course_name":" [FAMP 731B] Fam Med Continuity Core-Rural", "course_abbrev":"FAMP 731B"},
+  {"courseID":"471", "course_name":" [IMED 720R] Medicine I - Remediation", "course_abbrev":"IMED 720R 1"},
+  {"courseID":"411", "course_name":" [IMED 720] Internal Med - St Charles", "course_abbrev":"IMED 720 C"}
+ ]
