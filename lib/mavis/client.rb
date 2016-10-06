@@ -28,7 +28,12 @@ module Mavis
     # @param data [Hash]
     # @return [Hash, Array]
     def perform_post url, data
-      JSON.parse(HTTParty.post(url, body: data,).parsed_response())
+      p = HTTParty.post(url, body: data,)
+      begin
+        JSON.parse(p.parsed_response())
+      rescue TypeError
+        JSON.parse(p.to_json)
+      end
     end
 
     # get a hash of client id/auth values

@@ -30,6 +30,7 @@ describe Mavis::Users do
       t = @client.users_student_search({"username": "test"})
       expect(t).to be_a Array
       expect(t.first).to be_a Hash
+      expect(t.first["name_last"]).to eq "Sagan"
     end
   end
 end
