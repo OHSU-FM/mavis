@@ -5,6 +5,47 @@ describe Mavis::Evals do
     @client = Mavis::Client.new(client_id: "123", institution: "test", p_key: "456")
   end
 
+  describe "#evals_forms" do
+    # TODO test for other optional param
+    before do
+      stub_post("/evals/forms")
+        .with(body: body(@client, {"courseID": 600}.to_json) + "&request=%7B%22courseID%22%3A600%7D", headers: headers)
+        .to_return(status: 200, body: fixture("evals_forms.json"))
+    end
+
+    it "requests the correct resource" do
+      @client.evals_forms({"courseID": 600})
+      expect(a_post("/evals/forms")).to have_been_made
+    end
+  end
+
+  describe "#evals_incomplete" do
+    before do
+      stub_post("/evals/incomplete")
+        .with(body: body(@client, {"userID": 111}.to_json) + "&request=%7B%22userID%22%3A111%7D", headers: headers)
+        .to_return(status: 200, body: fixture("evals_forms.json"))
+    end
+    # TODO update fixture
+
+    it "requests the correct resource" do
+      @client.evals_incomplete(111)
+      expect(a_post("/evals/incomplete")).to have_been_made
+    end
+  end
+
+  describe "#evals_milestones" do
+    before do
+      stub_post("/evals/milestones")
+        .with(body: body(@client, {"programID": 1111, "list":"epas"}.to_json) + "&request=%7B%22programID%22%3A1111%2C%22list%22%3A%22epas%22%7D", headers: headers)
+        .to_return(status: 200, body: fixture("evals_questions.json"))
+    end
+
+    it "requests the correct resource" do
+      @client.evals_milestones(1111, "epas")
+      expect(a_post("/evals/milestones")).to have_been_made
+    end
+  end
+
   describe "#evals_questions" do
     before do
       stub_post("/evals/questions")
@@ -13,7 +54,7 @@ describe Mavis::Evals do
     end
 
     it "requests the correct resource" do
-      @client.evals_questions({"evaluationID": 1111})
+      @client.evals_questions(1111)
       expect(a_post("/evals/questions")).to have_been_made
     end
   end
@@ -41,6 +82,19 @@ describe Mavis::Evals do
     it "requests the correct resource" do
       @client.evals_status(11111)
       expect(a_post("/evals/status")).to have_been_made
+    end
+  end
+
+  describe "#evals_types" do
+    before do
+      stub_post("/evals/types")
+        .with(body: body(@client, ""), headers: headers)
+        .to_return(status: 200, body: fixture("evals_types.json"))
+    end
+
+    it "requests the correct resource" do
+      @client.evals_types()
+      expect(a_post("/evals/types")).to have_been_made
     end
   end
 end

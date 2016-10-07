@@ -26,10 +26,9 @@ describe Mavis::Courses do
         .to_return(status: 200, body: fixture("courses_access.json"))
     end
 
-    it "should return an Array of Hashes" do
-      t = @client.courses_all()
-      expect(t).to be_a Array
-      expect(t.first).to be_a Hash
+    it "should request the correct resource" do
+      @client.courses_all()
+      expect(a_post("/courses/all")).to have_been_made
     end
   end
 end

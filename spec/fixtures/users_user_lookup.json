@@ -1,0 +1,20 @@
+{
+  "userID":"567",
+  "name_last":"Johnson",
+  "name_first":"John",
+  "email":"johnsonj@ex.co",
+  "username":"johnsonj",
+  "employeeID":"",
+  "user_type":"8",
+  "user_type_name":"Medical Student",
+  "programID":"",
+  "program_name":"",
+  "resident_typeID":"",
+  "resident_level":"",
+  "status":"1",
+  "status_name":"Active",
+  "access":"1",
+  "access_name":"Access",
+  "photo_full_url":"https://ohsu-test.medhub.com/files/photos/m/567.jpg",
+  "photo_thumb_url":"https://ohsu-test.medhub.com/files/photos/m/567sm.jpg"
+}

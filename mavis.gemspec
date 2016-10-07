@@ -1,3 +1,6 @@
+# -*- encoding: utf-8 -*-
+require File.expand_path("../lib/mavis/version", __FILE__)
+
 Gem::Specification.new do |spec|
   spec.add_dependency "httparty", "~> 0.14.0"
   spec.add_dependency "naught", "~> 1.0"
@@ -12,5 +15,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w(lib)
   spec.required_ruby_version = ">= 1.9.3"
   spec.summary = spec.description
-  spec.version = "1.0.0"
+  spec.version = Mavis::Version
 end

@@ -1,30 +1,60 @@
 module Mavis
   module Evals
 
-    # Returns a list of all courses the account can call
+    # List active evaluation forms for a program/course
     #
     # @params terms [Hash] list of optional search terms
-    # @param programID [Integer]
-    # @param courseID [Integer]
-    # @return [Array[Hash]]
-    def evals_forms terms={}
+    # @param optional programID [Integer]
+    # @param optional courseID [Integer]
+    # @return evaluationID [Integer]
+    # @return evaluation_title [String]
+    # @return introduction [String]
+    # @return questions_count [Integer]
+    # @return types [Array] evaluation types this form can be used for
+    def evals_forms request
       call_path = "evals/forms"
-      request = terms
-      data = build_post_data(request)
+      data = build_post_data(request.to_json)
       perform_post(build_url(call_path), data)
     end
 
-    # Returns a list of all courses the account can call
+    # List incomplete evaluations for a given user
     #
-    # Ex: @client.evals_questions({"evaluationID": 1111})
+    # @params userID [Integer]
+    # @return responseID [Integer]
+    # @return evaluationID [Integer]
+    # @return eval_type [String] evaluation response title
+    # @return status [Integer] "incomplete"
+    def evals_incomplete user_id
+      call_path = "evals/incomplete"
+      data = build_post_data({"userID": user_id}.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
+    # List the milestones, EPAs or rotation objectives for a program
     #
-    # @params terms [Hash] list of optional search terms
+    # @params terms [Hash]
+    # @param programID [Integer]
+    # @param list [String] one of {"milestones", "epas", "elements"}
+    # @return reflID [Integer]
+    # @return global_relfID [Integer]
+    # @return name [String]
+    # @return abreb [String]
+    # @return status [Integer] {"active", "inactive"}
+    def evals_milestones program_id, list
+      call_path = "evals/milestones"
+      request = {"programID": program_id, "list": list}
+      data = build_post_data(request.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
+    # Lists the evaluation questions for a specified evaluation form
+    #
     # @param evaluationID [Integer]
     # @return [Array[Hash]]
-    def evals_questions terms={}
+    def evals_questions evaluation_id
       call_path = "evals/questions"
-      request = terms
-      data = build_post_data(request.to_json)
+      request = {"evaluationID": evaluation_id}.to_json
+      data = build_post_data(request)
       perform_post(build_url(call_path), data)
     end
 
@@ -37,7 +67,7 @@ module Mavis
     # @param optional programs [Array]
     # @param optional courses [Array]
     # @return responseID [Int] unique evaluation response identifier
-    def evals_responses(start_date, terms={})
+    def evals_responses start_date, terms={}
       call_path = "evals/responses"
       request = {"startDate": start_date}.merge(terms)
       data = build_post_data(request.to_json)
@@ -52,10 +82,20 @@ module Mavis
     # @return status_code [Int] {0: incomplete, 1: partially complete,
     #                 3: complete, 4,5: complete - tiered contributor}
     # @return status_title [String] status desc
-    def evals_status(response_id)
+    def evals_status response_id
       call_path = "evals/status"
       request = {"responseID": response_id}
       data = build_post_data(request.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
+    # List of possible evaluation delivery types
+    #
+    # @return typeID [Integer]
+    # @return type_name [String]
+    def evals_types
+      call_path = "evals/types"
+      data = build_post_data("")
       perform_post(build_url(call_path), data)
     end
   end

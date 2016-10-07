@@ -45,8 +45,8 @@ describe Mavis::Client do
     end
 
     it "returns false if any credentials are missing" do
-      expect(Mavis::Client.new(client_id: "123", p_key: "456").credentials?)
-        .to be_falsey
+      @c = Mavis::Client.new(client_id: "123", p_key: "456")
+      expect(@c.credentials?).to be_falsey
     end
   end
 

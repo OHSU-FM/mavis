@@ -1,0 +1,11 @@
+[
+  {"typeID":"6", "type_name":"M.D. Ph.D.", "visiting_flag":"0"},
+  {"typeID":"1", "type_name":"Medical Student", "visiting_flag":"0"},
+  {"typeID":"7", "type_name":"MPH", "visiting_flag":"0"},
+  {"typeID":"10", "type_name":"OMFS", "visiting_flag":"0"},
+  {"typeID":"9", "type_name":"Physician Scientist", "visiting_flag":"0"},
+  {"typeID":"8", "type_name":"Research", "visiting_flag":"0"},
+  {"typeID":"5", "type_name":"Student Fellow", "visiting_flag":"0"},
+  {"typeID":"2", "type_name":"Visiting Student", "visiting_flag":"1"}
+]
+
