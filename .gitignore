@@ -2,3 +2,4 @@ config/settings.yml
 test.rb
 *.gem
 tmp
+*.csv

@@ -1,16 +1,6 @@
 module Mavis
   module Users
 
-    # Identifies possible user-types at the institution
-    #
-    # @return [Array[Hash]]
-    def users_types
-      call_path = "users/types"
-      request = ""
-      data = build_post_data(request)
-      perform_post(build_url(call_path), data)
-    end
-
     # Lists active residents in the provided program
     #
     # @param program_id [Integer]
@@ -56,6 +46,44 @@ module Mavis
       perform_post(build_url(call_path), data)
     end
 
+    # Lists the active outside evaluators for a given program
+    #
+    # @param program_id [Integer]
+    # @return outsideID [Integer]
+    # @return name_last [String]
+    # @return name_first [String]
+    # @return email [String]
+    # @return location [String] optional field
+    # @return location_abbrev [String] optional field
+    # @return outside_type [Integer]
+    # @return outside_type_name [String]
+    def users_outside program_id
+      call_path = "users/outside"
+      request = {"programID": program_id}
+      data = build_post_data(request.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
+    # Provides outside evaluator information for the given unique id
+    #
+    # @param outside_id [Integer]
+    # @return outsideID [Integer]
+    # @return name_last [String]
+    # @return name_first [String]
+    # @return email [String]
+    # @return location [String] optional field
+    # @return location_abbrev [String] optional field
+    # @return outside_type [Integer]
+    # @return outside_type_name [String]
+    # @return status [Integer]
+    # @return status_name [String]
+    def users_outside_lookup outside_id
+      call_path = "users/outsideLookup"
+      request = {"outsideID": outside_id}
+      data = build_post_data(terms.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
     # Search for a faculty member. at least one of name, username, and
     # employeeID must be provided as key/value in the terms hash. If
     # multiple terms are provided, only returns records where both are
@@ -85,6 +113,19 @@ module Mavis
     def users_student_search terms={}
       call_path = "users/studentSearch"
       data = build_post_data(terms.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
+    # Identifies possible user-types at the institution
+    #
+    # @return usertype [Integer]
+    # @return type_name [String]
+    # @return active_users [Integer]
+    # @return total_users [Integer]
+    def users_types
+      call_path = "users/types"
+      request = ""
+      data = build_post_data(request)
       perform_post(build_url(call_path), data)
     end
 
