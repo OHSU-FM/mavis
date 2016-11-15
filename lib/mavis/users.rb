@@ -5,12 +5,12 @@ module Mavis
     #
     # @param program_id [Integer]
     # @return [Array[Hash]]
-    # def users_residents program_id
-    #   call_path = "users/residents"
-    #   request = {"programID": program_id}
-    #   data = build_post_data(request)
-    #   perform_post(build_url(call_path), data)
-    # end
+    def users_residents program_id
+      call_path = "users/residents"
+      request = {"programID": program_id}
+      data = build_post_data(request.to_json)
+      perform_post(build_url(call_path), data)
+    end
 
     # Lists active faculty in the provided program
     #
@@ -80,6 +80,29 @@ module Mavis
     def users_outside_lookup outside_id
       call_path = "users/outsideLookup"
       request = {"outsideID": outside_id}
+      data = build_post_data(request.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
+    # Search for a resident. at least one of name, username, or
+    # employeeID must be provided as key/value in the terms hash. If
+    # multiple terms are provided, only returns records where both are
+    # true
+    #
+    # @param terms [Hash]
+    # @param optional name [String]
+    # @param optional username [String]
+    # @param optional employeeID [String]
+    # @return userID [Integer]
+    # @return name_last [String]
+    # @return name_first [String]
+    # @return email [String]
+    # @return username [String]
+    # @return employeeID [String]
+    # @return typeID [Integer] see "Resident Types" endpoint
+    # @return level [Integer] PGY level
+    def users_resident_search terms={}
+      call_path = "users/residentSearch"
       data = build_post_data(terms.to_json)
       perform_post(build_url(call_path), data)
     end
@@ -93,7 +116,13 @@ module Mavis
     # @param optional name [String]
     # @param optional username [String]
     # @param optional employeeID [String]
-    # @return [Array[Hash]]
+    # @return userID [Integer]
+    # @return name_last [String]
+    # @return name_first [String]
+    # @return email [String]
+    # @return username [String]
+    # @return employeeID [String]
+    # @return programID [Integer]
     def users_faculty_search terms={}
       call_path = "users/facultySearch"
       data = build_post_data(terms.to_json)
@@ -109,7 +138,14 @@ module Mavis
     # @param optional name [String]
     # @param optional username [String]
     # @param optional employeeID [String]
-    # @return [Array[Hash]]
+    # @return userID [Integer]
+    # @return name_last [String]
+    # @return name_first [String]
+    # @return email [String]
+    # @return username [String]
+    # @return employeeID [String]
+    # @return typeID [Integer] see "Student Types" endpoint
+    # @return level [Integer] year in medical school
     def users_student_search terms={}
       call_path = "users/studentSearch"
       data = build_post_data(terms.to_json)

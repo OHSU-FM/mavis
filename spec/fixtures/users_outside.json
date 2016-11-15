@@ -1,0 +1,3 @@
+[{"outsideID":"2222", "name_last":"Bye", "name_first":"Hi", "email":"hibye@hi.bye", "location":"here", "location_abbrev":"", "outside_type":"3", "outside_type_name":"Staff"},
+ {"outsideID":"3333", "name_last":"That", "name_first":"This", "email":"thisthat@this.that", "location":"there", "location_abbrev":"", "outside_type":"3", "outside_type_name":"Staff"}
+]

@@ -23,9 +23,8 @@ describe Mavis::Evals do
     before do
       stub_post("/evals/incomplete")
         .with(body: body(@client, {"userID": 111}.to_json) + "&request=%7B%22userID%22%3A111%7D", headers: headers)
-        .to_return(status: 200, body: fixture("evals_forms.json"))
+        .to_return(status: 200, body: fixture("evals_incomplete.json"))
     end
-    # TODO update fixture
 
     it "requests the correct resource" do
       @client.evals_incomplete(111)

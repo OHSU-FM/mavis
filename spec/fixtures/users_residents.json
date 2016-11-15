@@ -1,0 +1,2 @@
+[{"userID":"2345", "name_last":"Goldwater", "name_first":"Barry", "email":"barry@test.edu", "username":"goldwater", "employeeID":"66666", "typeID":"2", "level":"3"},
+ {"userID":"5432", "name_last":"Johnson", "name_first":"Ron", "email":"rjohnson@hi.net", "username":"johnson", "employeeID":"66667", "typeID":"2", "level":"1"}]

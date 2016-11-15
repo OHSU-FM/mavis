@@ -58,6 +58,27 @@ module Mavis
       perform_post(build_url(call_path), data)
     end
 
+    # Returns progress report for a given resident in a given period
+    #
+    # ex: client.evals_progress({"programID":19,
+    #                            "userID":886858,
+    #                            "year":"2014",
+    #                            "half":"2"})
+    #
+    # @param programID [Integer]
+    # @param userID [Integer]
+    # @param year [Integer] four-digit, ex: 2016
+    # @param half [Integer] one of "1"/"2"
+    # @return milestone_reflID [Integer] see "Milestone List"
+    # @return level [Float] Dreyful level
+    # @return notes [String]
+    # @return status [String] "Draft" or "Final"
+    def evals_progress terms={}
+      call_path = "evals/progress"
+      data = build_post_data(terms.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
     # Returns evaluations data
     #
     # Ex: @client.evals_responses("2016-01-01", "courses": [1111])
