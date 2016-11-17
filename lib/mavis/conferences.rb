@@ -4,10 +4,10 @@ module Mavis
     # Lists conferences attended by an individual user in a specified date range
     #
     # @param user_id [Integer]
-    # @param program_id [Integer] required if course_id not supplied
-    # @param course_id [Integer] required if program_id not supplied
-    # @param start_date [String] YYYY-MM-DD
-    # @param end_date [String] YYYY-MM-DD
+    # @param programID [Integer] required if course_id not supplied
+    # @param courseID [Integer] required if program_id not supplied
+    # @param startDate [String] YYYY-MM-DD
+    # @param endDate [String] YYYY-MM-DD
     # @return conferenceID [Integer]
     # @return date [String] YYYY-MM-DD HH:mm(am/pm)
     # @return start_time [String] HH:MM:SS
@@ -26,11 +26,11 @@ module Mavis
 
     # Lists conference schedule for a program in a specified date range
     #
-    # @param program_id [Integer] required if course_id not supplied
-    # @param course_id [Integer] required if program_id not supplied
-    # @param start_date [String] YYYY-MM-DD
-    # @param end_date [String] YYYY-MM-DD
-    # @param group_id [Integer] not required -- can be used to filter by group
+    # @param programID [Integer] required if course_id not supplied
+    # @param courseID [Integer] required if program_id not supplied
+    # @param startDate [String] YYYY-MM-DD
+    # @param endDate [String] YYYY-MM-DD
+    # @param groupID [Integer] not required -- can be used to filter by group
     # @return conferenceID [Integer]
     # @return date [String] YYYY-MM-DD HH:mm(am/pm)
     # @return start_time [String] HH:MM:SS

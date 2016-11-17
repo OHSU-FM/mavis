@@ -87,12 +87,12 @@ describe Mavis::Users do
   describe "#users_faculty_search by name" do
     before do
       stub_post("/users/facultySearch")
-        .with(body: body(@client, {"name": "Peter Sagan"}.to_json) + "&request=%7B%22name%22%3A%22Peger%20Sagan%22%7D", headers: headers)
+        .with(body: body(@client, {"name": "Peter Sagan"}.to_json) + "&request=%7B%22name%22%3A%22Peter%20Sagan%22%7D", headers: headers)
         .to_return(status: 200, body: fixture("users_faculty_search.json"), headers: {})
     end
 
     it "requests the correct resource" do
-      @client.users_faculty_search({"name": "Peger Sagan"})
+      @client.users_faculty_search({"name": "Peter Sagan"})
       expect(a_post("/users/facultySearch")).to have_been_made
     end
   end
