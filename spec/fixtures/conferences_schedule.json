@@ -1,0 +1,4 @@
+[
+  {"conferenceID":"5614", "date":"2016-01-04", "start_time":"06:20:00", "end_time":"06:50:00", "title":"Conference 1", "location":"UHS 1111", "groupID":"14", "attendance_flag":"0"},
+  {"conferenceID":"1990", "date":"2016-01-04", "start_time":"15:45:00", "end_time":"16:30:00", "title":"Conference 2", "location":"KPV 1211", "groupID":"34", "attendance_flag":"1"}
+]

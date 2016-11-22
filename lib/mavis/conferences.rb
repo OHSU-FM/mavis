@@ -24,6 +24,19 @@ module Mavis
       perform_post(build_url(call_path), data)
     end
 
+    # Lists conference groups for a program
+    #
+    # @param programID [Integer] required if course_id not supplied
+    # @param courseID [Integer] required if program_id not supplied
+    # @return groupID [Integer] see 'Conference Groups' endpoint
+    # @return title [String]
+    # @return status [Integer] "Inactive" or "Active"
+    def conferences_groups terms={}
+      call_path = "conferences/groups"
+      data = build_post_data(terms.to_json)
+      perform_post(build_url(call_path), data)
+    end
+
     # Lists conference schedule for a program in a specified date range
     #
     # @param programID [Integer] required if course_id not supplied

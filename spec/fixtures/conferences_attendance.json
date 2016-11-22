@@ -1,0 +1,22 @@
+[
+  {"conferenceID":"1580",
+  "date":"2015-06-08",
+  "start_time":"07:00:00",
+  "end_time":"07:45:00",
+  "title":"Conference 1",
+  "location":"",
+  "groupID":"3",
+  "late_flag":"0",
+  "async_flag":"0",
+  "self_flag":"0"},
+  {"conferenceID":"3970",
+   "date":"2015-06-15",
+   "start_time":"07:00:00",
+   "end_time":"07:45:00",
+   "title":"Conference 2",
+   "location":"UHS 8B60",
+   "groupID":"3",
+   "late_flag":"0",
+   "async_flag":"0",
+   "self_flag":"0"}
+]
