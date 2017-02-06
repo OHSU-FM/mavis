@@ -4,7 +4,14 @@ module Mavis
     # Lists active residents in the provided program
     #
     # @param program_id [Integer]
-    # @return [Array[Hash]]
+    # @return userID [Integer]
+    # @return name_last [String]
+    # @return name_first [String]
+    # @return email [String]
+    # @return username [String]
+    # @return employeeID [String]
+    # @return typeID [Integer] see "resident types" to idenitify
+    # @return level [Integer] PGY level
     def users_residents program_id
       call_path = "users/residents"
       request = {"programID": program_id}
@@ -190,7 +197,15 @@ module Mavis
     # Returns information about a user
     #
     # @param userID [Integer]
-    # @return [Array[Hash]]
+    # @return name_last [String]
+    # @return name_first [String]
+    # @return email [String]
+    # @return username [String]
+    # @return employeeID [String]
+    # @return user_type [Integer]
+    # @return user_type_name [String]
+    # @return programID [Integer]
+    # @return program_name [String]
     def users_user_lookup user_id
       call_path = "users/userLookup"
       request = {"userID": user_id}
